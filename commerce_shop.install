@@ -12,7 +12,100 @@ function commerce_shop_schema() {
   $schema = array();
   
   $schema['commerce_shop'] = array(
-    
+    'description' => 'The base table for commerce_shop entities.',
+    'fields' => array(
+      'shop_id' => array(
+        'description' => 'Primary Key: Identifier for a commerce_shop.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The type of this commerce_shop.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'description' => 'The machine_name of this commerce_shop.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'owner' => array(
+        'description' => "The {users}.uid of the associated user.",
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'title' => array(
+        'description' => 'The brand title of the commerce_shop.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'sub_title' => array(
+        'description' => 'The sub-title of the commerce_shop, usually a slogan.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'description' => array(
+        'description' => 'Description of the commerce_shop.',
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'path' => array(
+        'description' => 'Drupal path.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'status' => array(
+        'description' => "The status of the commerce_shop.",
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0x01,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the project was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the project was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'data' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of additional data.',
+      ),
+    ),
+    'primary key' => array('shop_id'),
+    'indexes' => array(
+      'type' => array('type'),
+      'owner' => array('owner'),
+    ),
+    'unique keys' => array(
+      'name' => array('name'),
+    ),
+    'foreign keys' => array(
+      'owner' => array('users' => 'uid'),
+    ),
   );
   
   return $schema;

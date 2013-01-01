@@ -32,12 +32,25 @@ class CommerceShopUIController extends EntityDefaultUIController {
       'description' => 'Manage commerce_shop entities.',
       'type' => MENU_DEFAULT_LOCAL_TASK,
     );
+    
+    /*
+    $items[$this->path . '/manage'] = array(
+      'title' => 'Configure shop',
+      'description' => 'Configure shop settings.',
+      'page callback'  => 'commerce_shop_admin_overview',
+      'access arguments' => array('access administration pages'),
+      'type' => MENU_LOCAL_TASK,
+      'weight' => 20,
+      'file' => 'commerce_shop.admin.inc',
+      'file path' => drupal_get_path('module', $this->entityInfo['module']),
+    );
+    */
 
-    // Change the add page menu to multiple types of entities
     $items[$this->path . '/add'] = array(
-      'title' => 'Add a commerce_shop',
-      'description' => 'Add a new commerce_shop.',
+      'title' => 'Add a shop',
+      'description' => 'Add a new shop.',
       'page callback'  => 'commerce_shop_admin_edit',
+      'page arguments' => array(commerce_shop_create(array('type' => 'shop'))),
       'access callback'  => 'commerce_shop_access',
       'access arguments' => array('edit'),
       'type' => MENU_LOCAL_ACTION | MENU_LOCAL_TASK,
@@ -84,7 +97,7 @@ class CommerceShopUIController extends EntityDefaultUIController {
       'page arguments' => array(1),
       'access callback' => 'commerce_shop_access',
       'access arguments' => array('view', 1),
-      'file' => 'project.page.inc',
+      'file' => 'project.pages.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module']),
       'type' => MENU_CALLBACK,
     );

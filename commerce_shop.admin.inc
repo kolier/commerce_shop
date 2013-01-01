@@ -6,7 +6,7 @@
  */
 
 function commerce_shop_admin_overview() {
-  
+  return '';
 }
 
 function commerce_shop_admin_edit($commerce_shop) {
@@ -14,13 +14,26 @@ function commerce_shop_admin_edit($commerce_shop) {
 }
 
 function commerce_shop_form_edit($form, $form_state, $commerce_shop) {
-  // Add the default field elements.
   $form['title'] = array(
     '#type' => 'textfield',
     '#title' => t('Shop title'),
     '#default_value' => isset($commerce_shop->title) ? $commerce_shop->title : '',
     '#maxlength' => 255,
     '#required' => TRUE,
+    '#weight' => -10,
+  );
+  $form['sub_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Shop sub-title'),
+    '#default_value' => isset($commerce_shop->sub_title) ? $commerce_shop->sub_title : '',
+    '#maxlength' => 255,
+    '#weight' => -5,
+  );
+  $form['description'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Shop sub-title'),
+    '#default_value' => isset($commerce_shop->sub_title) ? $commerce_shop->sub_title : '',
+    '#maxlength' => 255,
     '#weight' => -5,
   );
   

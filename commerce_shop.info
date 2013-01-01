@@ -9,6 +9,7 @@ files[] = includes/commerce_shop.controller.inc
 files[] = includes/commerce_shop.ui.inc
 files[] = commerce_shop.info.inc
 
-dependencies[] = entity
 dependencies[] = commerce
+dependencies[] = entity
+dependencies[] = taxonomy
 dependencies[] = og

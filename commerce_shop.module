@@ -9,7 +9,9 @@
  * Implements hook_entity_info().
  */
 function commerce_shop_entity_info() {
-  $return = array(
+  $return = array();
+  
+  $return['commerce_shop'] = array(
     'label' => t('Commerce Shop'),
     'fieldable' => TRUE,
     'base table' => 'commerce_shop',
@@ -24,9 +26,9 @@ function commerce_shop_entity_info() {
       'shop' => array(
         'label' => t('Shop'),
         'admin' => array(
-          'path' => 'admin/commerce/shops/types/%commerce_shop_type',
+          'path' => 'admin/commerce/shops/types/manage/%commerce_shop_type',
           'bundle argument' => 4,
-          'real path' => 'admin/commerce/shops/types/shop',
+          'real path' => 'admin/commerce/shops/types/manage/shop',
         ),
       ),
     ),
