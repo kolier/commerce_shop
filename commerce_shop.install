@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Install file for commerce_shop.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function commerce_shop_schema() {
+  $schema = array();
+  
+  $schema['commerce_shop'] = array(
+    
+  );
+  
+  return $schema;
+}

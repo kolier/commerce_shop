@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Commerce Shop main functionality.
+ */
+
+/**
+ * Implements hook_entity_info().
+ */
+function commerce_shop_entity_info() {
+  $return = array(
+    'label' => t('Commerce Shop'),
+    'fieldable' => TRUE,
+    'base table' => 'commerce_shop',
+    'entity keys' => array(
+      'id' => 'shop_id',
+      'bundle' => 'type',
+      'name' => 'name',
+      'label' => 'title',
+    ),
+    'bundles' => array(
+      // Is commerce_shop_type needed?
+      'shop' => array(
+        'label' => t('Shop'),
+        'admin' => array(
+          'path' => 'admin/commerce/shops/types/%commerce_shop_type',
+          'bundle argument' => 4,
+          'real path' => 'admin/commerce/shops/types/shop',
+        ),
+      ),
+    ),
+    'view modes' => array(
+      'full' => array(
+        'label' => t('Full'),
+        'custom settings' => FALSE,
+      ),
+    ),
+    'module' => 'commerce_shop',
+    'token type' => 'commerce-shop',
+    // Classes.
+    'entity calss' => 'CommerceShop',
+    'controller class' => 'CommerceShopController',
+    // Callbacks.
+    'lable callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+    'access callback' => 'commerce_shop_access',
+    'access arguments' => array(
+      'user key' => 'uid',
+      'access tag' => 'commerce_shop_access',
+    ),
+    'creation callback' => 'commerce_shop_create',
+    'save callback' => 'commerce_shop_save',
+    'deletion callback' => 'commerce_shop_delete',
+    //'view callback' => 'commerce_shop_view',
+    'admin ui' => array(
+      'controller class' => 'CommerceShopUIController',
+      'path' => 'admin/commerce/shops',
+      'menu wildcard' => '%commerce_shop',
+      'file' => 'commerce_shop.admin.inc',
+      'file path' => drupal_get_path('module', 'commerce_shop'),
+    ),
+  );
+  
+  return $return;
+}
+
+/**
+ * Entity access callback.
+ */
+function commerce_shop_access($op = 'view', $permission = NULL, $commerce_shop = NULL) {
+  // @todo Implements access control.
+  return TRUE;
+}
+
+/**
+ * Entity creation callback.
+ */
+function commerce_shop_create($values = array()) {
+  return entity_get_controller('commerce_shop')->create($values);
+}
+
+/**
+ * Entity save callback.
+ */
+function commerce_shop_save($commerce_shop) {
+  return entity_get_controller('commerce_shop')->save($commerce_shop);
+}
+
+/**
+ * Entity deletion callback.
+ */
+function commerce_shop_delete($id) {
+  return entity_get_controller('commerce_shop')->delete($id);
+}
+
+/**
+ * Entity view callback.
+ */
+function commerce_shop_view($commerce_shops, $view_mode = 'full', $language = NULL, $page = NULL) {
+  return entity_get_controller('commerce_shop')->view($commerce_shops, $view_mode, $language, $page);
+}

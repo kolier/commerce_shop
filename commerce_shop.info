@@ -1,0 +1,14 @@
+name = Shop
+description = Provides a shop entity, suitable for a marketplace.
+package = Commerce
+core = 7.x
+version = VERSION
+
+files[] = includes/commerce_shop.entity.inc
+files[] = includes/commerce_shop.controller.inc
+files[] = includes/commerce_shop.ui.inc
+files[] = commerce_shop.info.inc
+
+dependencies[] = entity
+dependencies[] = commerce
+dependencies[] = og
