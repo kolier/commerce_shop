@@ -22,7 +22,7 @@ class CommerceShopController extends EntityAPIController {
    *   A commerce_shop object with all default fields initialized.
    */
   public function create(array $values = array()) {
-    // Add values that are specific to our Model
+
     $values += array(
       'shop_id' => '',
       'name' => '',

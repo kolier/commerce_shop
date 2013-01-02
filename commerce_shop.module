@@ -26,9 +26,9 @@ function commerce_shop_entity_info() {
       'shop' => array(
         'label' => t('Shop'),
         'admin' => array(
-          'path' => 'admin/commerce/shops/types/manage/%commerce_shop_type',
-          'bundle argument' => 4,
-          'real path' => 'admin/commerce/shops/types/manage/shop',
+          'path' => 'admin/commerce/shops/%commerce_shop_type',
+          'bundle argument' => 3,
+          'real path' => 'admin/commerce/shops/shop',
         ),
       ),
     ),
@@ -41,7 +41,7 @@ function commerce_shop_entity_info() {
     'module' => 'commerce_shop',
     'token type' => 'commerce-shop',
     // Classes.
-    'entity calss' => 'CommerceShop',
+    'entity class' => 'CommerceShop',
     'controller class' => 'CommerceShopController',
     // Callbacks.
     'lable callback' => 'entity_class_label',
@@ -72,6 +72,7 @@ function commerce_shop_entity_info() {
  */
 function commerce_shop_access($op = 'view', $permission = NULL, $commerce_shop = NULL) {
   // @todo Implements access control.
+  
   return TRUE;
 }
 
@@ -101,4 +102,21 @@ function commerce_shop_delete($id) {
  */
 function commerce_shop_view($commerce_shops, $view_mode = 'full', $language = NULL, $page = NULL) {
   return entity_get_controller('commerce_shop')->view($commerce_shops, $view_mode, $language, $page);
+}
+
+/**
+ * Check if machine_name of a shop already exists.
+ */
+function commmerce_shop_name_exists($value) {
+  $result = db_select('commerce_shop', 'cs')
+    ->fields('cs', array('name'))
+    ->condition('name', $value)
+    ->execute()
+    ->fetchField();
+  
+  return $result;
+}
+
+function commerce_shop_get_types() {
+  
 }

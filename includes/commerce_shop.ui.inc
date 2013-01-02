@@ -15,23 +15,7 @@ class CommerceShopUIController extends EntityDefaultUIController {
     $id_count = count(explode('/', $this->path));
     $wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%' . $this->entityType;
 
-    $items[$this->path] = array(
-      'title' => 'Commerce shops',
-      'description' => 'Manage commerce shops.',
-      'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
-      'page callback' => 'commerce_shop_admin_overview',
-      'access arguments' => array('access administration pages'),
-      'file' => 'commerce_shop.admin.inc',
-      'file path' => drupal_get_path('module', $this->entityInfo['module']),
-    );
-
-    // Overview.
-    // @todo access control.
-    $item[$this->path . '/list'] = array(
-      'title' => 'Manage commerce shops',
-      'description' => 'Manage commerce_shop entities.',
-      'type' => MENU_DEFAULT_LOCAL_TASK,
-    );
+    // Note: admin/commerce/shops is defined by a default View.
     
     /*
     $items[$this->path . '/manage'] = array(
@@ -53,7 +37,7 @@ class CommerceShopUIController extends EntityDefaultUIController {
       'page arguments' => array(commerce_shop_create(array('type' => 'shop'))),
       'access callback'  => 'commerce_shop_access',
       'access arguments' => array('edit'),
-      'type' => MENU_LOCAL_ACTION | MENU_LOCAL_TASK,
+      'type' => MENU_LOCAL_ACTION,
       'weight' => 20,
       'file' => 'commerce_shop.admin.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module']),
@@ -62,9 +46,9 @@ class CommerceShopUIController extends EntityDefaultUIController {
     // Loading and editing project entities
     $items[$this->path . '/shop/' . $wildcard] = array(
       'page callback' => 'commerce_shop_admin_edit',
-      'page arguments' => array($id_count + 1),
+      'page arguments' => array($id_count + 2),
       'access callback' => 'project_access',
-      'access arguments' => array('edit', $id_count + 1),
+      'access arguments' => array('edit', $id_count + 2),
       'weight' => 0,
       'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
       'file' => 'commerce_shop.admin.inc',
@@ -79,9 +63,9 @@ class CommerceShopUIController extends EntityDefaultUIController {
     $items[$this->path . '/shop/' . $wildcard . '/delete'] = array(
       'title' => 'Delete',
       'page callback' => 'commerce_shop_admin_delete',
-      'page arguments' => array($id_count + 1),
+      'page arguments' => array($id_count + 2),
       'access callback' => 'commerce_shop_access',
-      'access arguments' => array('edit', $id_count + 1),
+      'access arguments' => array('edit', $id_count + 2),
       'file' => 'commerce_shop.admin.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module']),
       'weight' => 10,
